@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarDealer Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #navbar {
+            background-color: #d0f7fe;
+            color: white;
+            padding: 5px 20px;
+            line-height: 5px; 
+        }
+        #chat-container {
+            width: 90%;
+            margin-top: 100%; 
+            margin: 50px auto;
+        }
+        #chat-messages {
+            border: 1px solid #ccc;
+            height: 350px;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+        #user-input {
+            width: 97%; 
+            padding: 15px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        #user-message {
+            width:90%; /* Adjust the width as needed */
+            padding: 8px; /* Increase padding for better visual appearance */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px; /* Increase font size as needed */
+        }
+        #send-btn {
+            padding: 15px 15px;
+            margin-left: 20px;
+            border: none;
+            background-color: #d0f7fe;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #navbar img {
+        width: 200px; /* Set the width of the image */
+        height: auto; /* Maintain aspect ratio */
+    }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <h2><img src="carcar.png" alt="Car Image"></h2>
+    </div>
+    <div id="chat-container">
+        <div id="chat-messages">
+            <!-- Placeholder for chat messages -->
+        </div>
+        <div id="user-input">
+            <input type="text" id="user-message" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a message to the chat
+        function addMessage(sender, message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatMessages.appendChild(messageDiv);
+            // Scroll to bottom of chat container
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to handle sending a message
+        function sendMessage() {
+            const userInput = document.getElementById('user-message');
+            const message = userInput.value.trim();
+            if (message !== '') {
+                addMessage('User', message);
+                // Reset user input
+                userInput.value = '';
+                // Simulate response from chatbot
+                simulateChatbotResponse(message);
+            }
+        }
+
+        // Function to simulate a response from the chatbot
+        function simulateChatbotResponse(message) {
+            setTimeout(() => {
+                const response = 'This is a response from the chatbot.';
+                addMessage('Costumer Service', response);
+            }, 500); // Simulate delay
+        }
+
+        // Event listener for send button click
+        document.getElementById('send-btn').addEventListener('click', sendMessage);
+
+        // Event listener for pressing enter in the input field
+        document.getElementById('user-message').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
